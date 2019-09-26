@@ -1,0 +1,162 @@
+   1               		.file	"main.c"
+   2               	__SREG__ = 0x3f
+   3               	__SP_H__ = 0x3e
+   4               	__SP_L__ = 0x3d
+   5               	__CCP__  = 0x34
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+  15               	.Ltext0:
+  16               		.data
+  17               	.LC0:
+  18 0000 2564 00   		.string	"%d"
+  19               	.LC1:
+  20 0003 4156 5200 		.string	"AVR"
+  21               		.text
+  22               	.global	main
+  24               	main:
+  25               	.LFB7:
+  26               	.LM1:
+  27 0000 AF92      		push r10
+  28 0002 BF92      		push r11
+  29 0004 CF92      		push r12
+  30 0006 DF92      		push r13
+  31 0008 EF92      		push r14
+  32 000a FF92      		push r15
+  33 000c 0F93      		push r16
+  34 000e 1F93      		push r17
+  35 0010 DF93      		push r29
+  36 0012 CF93      		push r28
+  37 0014 00D0      		rcall .
+  38 0016 00D0      		rcall .
+  39 0018 CDB7      		in r28,__SP_L__
+  40 001a DEB7      		in r29,__SP_H__
+  41               	/* prologue: function */
+  42               	/* frame size = 4 */
+  43               	.LM2:
+  44 001c 80E1      		ldi r24,lo8(16)
+  45 001e 00D0      		rcall lcd_init
+  46               	.LM3:
+  47 0020 8E01      		movw r16,r28
+  48 0022 0F5F      		subi r16,lo8(-(1))
+  49 0024 1F4F      		sbci r17,hi8(-(1))
+  50 0026 20E0      		ldi r18,lo8(.LC0)
+  51 0028 A22E      		mov r10,r18
+  52 002a 20E0      		ldi r18,hi8(.LC0)
+  53 002c B22E      		mov r11,r18
+  54 002e 92ED      		ldi r25,lo8(1234)
+  55 0030 C92E      		mov r12,r25
+  56 0032 94E0      		ldi r25,hi8(1234)
+  57 0034 D92E      		mov r13,r25
+  58               	.LBB12:
+  59               	.LBB13:
+  60               	.LBB14:
+  61               	.LBB15:
+  62               	.LM4:
+  63 0036 88EC      		ldi r24,lo8(200)
+  64 0038 E82E      		mov r14,r24
+  65 003a F12C      		mov r15,__zero_reg__
+  66               	.LVL0:
+  67               	.L3:
+  68               	.LBE15:
+  69               	.LBE14:
+  70               	.LBE13:
+  71               	.LBE12:
+  72               	.LM5:
+  73 003c 00D0      		rcall .
+  74 003e 00D0      		rcall .
+  75 0040 00D0      		rcall .
+  76 0042 EDB7      		in r30,__SP_L__
+  77 0044 FEB7      		in r31,__SP_H__
+  78               	.LVL1:
+  79 0046 3196      		adiw r30,1
+  80 0048 ADB7      		in r26,__SP_L__
+  81 004a BEB7      		in r27,__SP_H__
+  82 004c 1296      		adiw r26,1+1
+  83 004e 1C93      		st X,r17
+  84 0050 0E93      		st -X,r16
+  85 0052 1197      		sbiw r26,1
+  86 0054 B382      		std Z+3,r11
+  87 0056 A282      		std Z+2,r10
+  88 0058 D582      		std Z+5,r13
+  89 005a C482      		std Z+4,r12
+  90 005c 00D0      		rcall sprintf
+  91               	.LVL2:
+  92               	.LM6:
+  93 005e 8DB7      		in r24,__SP_L__
+  94 0060 9EB7      		in r25,__SP_H__
+  95 0062 0696      		adiw r24,6
+  96 0064 0FB6      		in __tmp_reg__,__SREG__
+  97 0066 F894      		cli
+  98 0068 9EBF      		out __SP_H__,r25
+  99 006a 0FBE      		out __SREG__,__tmp_reg__
+ 100 006c 8DBF      		out __SP_L__,r24
+ 101 006e 00D0      		rcall lcd_clear
+ 102               	.LM7:
+ 103 0070 81E0      		ldi r24,lo8(1)
+ 104 0072 61E0      		ldi r22,lo8(1)
+ 105 0074 00D0      		rcall lcd_gotoxy
+ 106               	.LM8:
+ 107 0076 81E4      		ldi r24,lo8(65)
+ 108 0078 00D0      		rcall lcd_putchar
+ 109               	.LM9:
+ 110 007a 85E0      		ldi r24,lo8(5)
+ 111 007c 61E0      		ldi r22,lo8(1)
+ 112 007e 00D0      		rcall lcd_gotoxy
+ 113               	.LM10:
+ 114 0080 C801      		movw r24,r16
+ 115 0082 00D0      		rcall lcd_puts
+ 116               	.LM11:
+ 117 0084 80E0      		ldi r24,lo8(0)
+ 118 0086 60E0      		ldi r22,lo8(0)
+ 119 0088 00D0      		rcall lcd_gotoxy
+ 120               	.LM12:
+ 121 008a 80E0      		ldi r24,lo8(.LC1)
+ 122 008c 90E0      		ldi r25,hi8(.LC1)
+ 123 008e 00D0      		rcall lcd_putsf
+ 124 0090 80E1      		ldi r24,lo8(10000)
+ 125 0092 97E2      		ldi r25,hi8(10000)
+ 126               	.LVL3:
+ 127               	.L2:
+ 128               	.LBB19:
+ 129               	.LBB18:
+ 130               	.LBB17:
+ 131               	.LBB16:
+ 132               	.LM13:
+ 133 0094 F701      		movw r30,r14
+ 134               	.LVL4:
+ 135               	/* #APP */
+ 136               	 ;  105 "c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h" 1
+ 137 0096 3197      		1: sbiw r30,1
+ 138 0098 01F4      		brne 1b
+ 139               	 ;  0 "" 2
+ 140               	/* #NOAPP */
+ 141               	.LBE16:
+ 142               	.LBE17:
+ 143               	.LM14:
+ 144 009a 0197      		sbiw r24,1
+ 145               	.LM15:
+ 146 009c 01F4      		brne .L2
+ 147 009e 00C0      		rjmp .L3
+ 148               	.LBE18:
+ 149               	.LBE19:
+ 150               	.LFE7:
+ 176               	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\NISHAN~1\AppData\Local\Temp/ccrgkBkj.s:2      *ABS*:0000003f __SREG__
+C:\Users\NISHAN~1\AppData\Local\Temp/ccrgkBkj.s:3      *ABS*:0000003e __SP_H__
+C:\Users\NISHAN~1\AppData\Local\Temp/ccrgkBkj.s:4      *ABS*:0000003d __SP_L__
+C:\Users\NISHAN~1\AppData\Local\Temp/ccrgkBkj.s:5      *ABS*:00000034 __CCP__
+C:\Users\NISHAN~1\AppData\Local\Temp/ccrgkBkj.s:6      *ABS*:00000000 __tmp_reg__
+C:\Users\NISHAN~1\AppData\Local\Temp/ccrgkBkj.s:7      *ABS*:00000001 __zero_reg__
+C:\Users\NISHAN~1\AppData\Local\Temp/ccrgkBkj.s:24     .text:00000000 main
+
+UNDEFINED SYMBOLS
+lcd_init
+sprintf
+lcd_clear
+lcd_gotoxy
+lcd_putchar
+lcd_puts
+lcd_putsf
+__do_copy_data
